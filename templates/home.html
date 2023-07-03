@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<link href="" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="templatemo_container">
+    <div id="templatemo_menu">
+        <ul>
+            <li><a class="current" href="{% url 'home' %}">Home</a></li>
+
+        </ul>
+    </div> <!-- end of menu -->
+    {% include 'footer_news.html' %}
+
+
+    <div id="templatemo_new_books">
+
+        <ul>
+
+            <li>{{new.title}}</li>
+
+        </ul>
+
+    </div>
+
+</div> <!-- end of header -->
+
+
+<div id="templatemo_content">
+
+    <div id="templatemo_content_left">
+        <div class="templatemo_content_left_section">
+            <h1>Categories</h1>
+            {% for c in cat %}
+            <ul>
+                <li><a href="{% url 'home' %}">{{ c.name }}</a></li>
+
+            </ul>
+            {% endfor %}
+        </div>
+
+
+        <div class="templatemo_content_left_section">
+            <h1>Bestsellers</h1>
+            <ul>
+                {% for b in best %}
+                <li><a href="{% url 'subpage' b.slug  %}">{{ b.title }}</a></li>
+
+                {% endfor %}
+
+            </ul>
+        </div>
+
+        <div class="templatemo_content_left_section">
+            <a href="https://blogdeveloper.pythonanywhere.com/" target="_blank"><img
+                    alt="" border="0" height="31" src="..//static/img/noclick.gif"
+                    style="border:0;width:88px;height:31px" vspace="8" width="88"/></a>
+
+        </div>
+    </div> <!-- end of content left -->
+
+    <div id="templatemo_content_right">
+
+        {% for a in book %}
+        <div class="templatemo_product_box">
+            <h1>{{a.title}} <span></span></h1>
+            <img alt="image" src="/media/{{ a.post_img }}"/>
+            <div class="product_info">
+                <p>{{ a.body|safe| truncatechars:60}}</p>
+                <h3>{{a.price}}$</h3>
+
+                <div class="detail_button"><a href="{% url 'subpage' a.slug  %}">Detail</a></div>
+            </div>
+            <div class="cleaner">&nbsp;</div>
+
+        </div>
+
+        {% endfor %}
+        <div class="cleaner_with_height">&nbsp;</div>
+
+        <!-- end of content right -->
+
+        <div class="cleaner_with_height">&nbsp;</div>
+    </div> <!-- end of content -->
+    {% include 'footer.html' %}
+
+</div>
+</div>
+</body>
+</html>
+
+{% endblock %}
